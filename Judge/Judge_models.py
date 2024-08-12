@@ -89,7 +89,7 @@ def load_progress(progress_file):
     return {}
 
 # Function to process each category of data and evaluate the performance of different models
-def process_category(model_dirs, category_dirs, output_dir, progress_file='../NewEvaluateResults/ds.pos'):
+def process_category(model_dirs, category_dirs, output_dir, progress_file='Run_Models/NewEvaluateResults/ds.pos'):
     progress = load_progress(progress_file)
 
     for category in tqdm(category_dirs, desc="Processing categories"):
@@ -97,7 +97,7 @@ def process_category(model_dirs, category_dirs, output_dir, progress_file='../Ne
             continue
 
         # Load the original texts from the first50.jsonl file
-        original_file_path = os.path.join('../classify_data', category, 'first50.jsonl')
+        original_file_path = os.path.join('Run_Models/classify_data', category, 'first50.jsonl')
         original_texts = [item['text'] for item in read_jsonl(original_file_path)]
 
         rewritten_texts_per_category = {}
@@ -144,19 +144,19 @@ def process_category(model_dirs, category_dirs, output_dir, progress_file='../Ne
 # Main function for testing
 def main():
     model_dirs = {
-        'qwen2': '../RewriteResults/qwen2',
-        'llama3': '../RewriteResults/llama3',
-        'yi': '../RewriteResults/yi',
-        'gemma2': '../RewriteResults/gemma2',
-        'commandR': '../RewriteResults/command',
-        'llama3_1_70b': '../RewriteResults/llama3_1_70b',
-        'deepseek': '../RewriteResults/deepseek',
-        'mistral': '../RewriteResults/mistral'
+        'qwen2': 'Run_Models/RewriteResults/qwen2',
+        'llama3': 'Run_Models/RewriteResults/llama3',
+        'yi': 'Run_Models/RewriteResults/yi',
+        'gemma2': 'Run_Models/RewriteResults/gemma2',
+        'commandR': 'Run_Models/RewriteResults/command',
+        'llama3_1_70b': 'Run_Models/RewriteResults/llama3_1_70b',
+        'deepseek': 'Run_Models/RewriteResults/deepseek',
+        'mistral': 'Run_Models/RewriteResults/mistral'
     }
 
-    category_dirs = [d for d in os.listdir('../classify_data/') if os.path.isdir(os.path.join('../classify_data/', d))]
+    category_dirs = [d for d in os.listdir('Run_Models/classify_data/') if os.path.isdir(os.path.join('Run_Models/classify_data/', d))]
     
-    output_dir = '../NewEvaluateResults'
+    output_dir = 'Run_Models/NewEvaluateResults'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
