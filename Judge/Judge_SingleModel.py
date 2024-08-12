@@ -89,7 +89,7 @@ def load_progress(progress_file):
     return {}
 
 # Function to process each category and evaluate the models
-def process_category(model_dirs, category_dirs, output_dir, progress_file='../EvaluateResults/yi.pos'):
+def process_category(model_dirs, category_dirs, output_dir, progress_file='EvaluateResults/yi.pos'):
     progress = load_progress(progress_file)
 
     for category in tqdm(category_dirs, desc="Processing categories"):
@@ -98,7 +98,7 @@ def process_category(model_dirs, category_dirs, output_dir, progress_file='../Ev
             continue
 
         # Load the original texts from the first50.jsonl file
-        original_file_path = os.path.join('../classify_data', category, 'first50.jsonl')
+        original_file_path = os.path.join('classify_data', category, 'first50.jsonl')
         original_texts = [item['text'] for item in read_jsonl(original_file_path)]
 
         # Load the rewritten texts from each model
@@ -144,17 +144,17 @@ def process_category(model_dirs, category_dirs, output_dir, progress_file='../Ev
 # Main function for testing
 def main():
     model_dirs = {
-#       'llama3_1_70b': '../RewriteResults/llama3_1_70b',
-#       'mistral-large': '../RewriteResults/mistral'
-#       'deepseek': '../RewriteResults/deepseek'
-#       'command': '../RewriteResults/command'
-#       'qwen2': '../RewriteResults/qwen2'
-       'yi': '../RewriteResults/yi'
+#       'llama3_1_70b': 'RewriteResults/llama3_1_70b',
+#       'mistral-large': 'RewriteResults/mistral'
+#       'deepseek': 'RewriteResults/deepseek'
+#       'command': 'RewriteResults/command'
+#       'qwen2': 'RewriteResults/qwen2'
+       'yi': 'RewriteResults/yi'
     }
 
-    category_dirs = [d for d in os.listdir('../classify_data/') if os.path.isdir(os.path.join('../classify_data/', d))]
+    category_dirs = [d for d in os.listdir('classify_data/') if os.path.isdir(os.path.join('classify_data/', d))]
     
-    output_dir = '../EvaluateResults/yi'
+    output_dir = 'EvaluateResults/yi'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
